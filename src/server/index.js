@@ -27,6 +27,7 @@ const loggerMiddleware = require('./middleware/loggerMiddleware');
 const missingBundleMiddleware = require('./middleware/missingBundleMiddleware');
 const systraceMiddleware = require('./middleware/systraceMiddleware');
 const rawBodyMiddleware = require('./middleware/rawBodyMiddleware');
+const reloadAppMiddleware = require('./middleware/reloadAppMiddleware');
 
 const WebSocketServer = require('ws').Server;
 
@@ -75,6 +76,7 @@ function createServer(
     .use(rawBodyMiddleware)
     .use(devToolsMiddleware(debuggerProxy))
     .use(liveReloadMiddleware(compiler))
+    .use(reloadAppMiddleware)
     .use(statusPageMiddleware)
     .use(symbolicateMiddleware(compiler))
     .use(openInEditorMiddleware())
